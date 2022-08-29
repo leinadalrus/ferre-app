@@ -1,0 +1,15 @@
+version: "3"
+  services:
+    db:
+      image: postgres:alpine
+      ports:
+        - "5433:5432"
+      expose:
+        - "5432"
+      environment:
+        POSTGRES_DB: POSTGRES_APP_DB
+        POSTGRES_USER: POSTGRES_APP_USER
+        POSTGRES_PASSWORD: POSTGRES_APP_USER_PASSWORD
+      volumes:
+        - "./pgdata:/var/lib/postgresql/data"
+        - "./infra/scripts/data/postgrest_exec.sh"
