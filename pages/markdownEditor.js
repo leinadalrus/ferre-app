@@ -8,28 +8,35 @@ function MarkdownEditor ({ documents }) {
   )
 }
 
-// export async function getStaticProps () {
-//   const response = await fetch('https://.../documents')
-//   const request = await response.json()
+/* export async function getStaticProps () {
+  const response = await fetch('https://.../documents')
+  const request = await response.json()
 
-//   return {
-//     props: {
-//       documents
-//     }
-//   }
-// }
+  return {
+    props: {
+      documents
+    }
+  }
+} */
 
 export async function getStaticPaths () {
   const response = await fetch('https://.../documents')
   const documents = await response.json()
 
-  const paths = documents.map(docs => {
+  const paths = documents.map(document => {
     params: {
-      id: docs.id
+      id: document.id
     }
   })
 
   return { paths, fallback: false }
+}
+
+export async function getStaticProps({ params }) {
+  const response = await fetch(`https://.../documents/${params.id}`)
+  const request = await response.json()
+
+  return { props: { document }}
 }
 
 export default MarkdownEditor
