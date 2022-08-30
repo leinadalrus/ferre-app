@@ -1,14 +1,14 @@
-const marked = require("marked");
-import ModelController from "./ModelController";
+const marked = require('marked')
+import ModelController from './ModelController'
 
 class MarkdownEditorController extends ModelController {
-  constructor() {
-    super();
+  constructor () {
+    super()
     const markdownEditorOps = {
-      src: "/public/documents",
-      type: "file/md"
-    };
+      src: '/public/documents/baseModel.md',
+      type: 'file/md'
+    }
   }
-};
+}
 
-export default MarkdownEditorController;
+export default MarkdownEditorController

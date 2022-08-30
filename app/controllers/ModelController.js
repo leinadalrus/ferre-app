@@ -1,24 +1,24 @@
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router'
 
 class ModelController {
-  constructor() {}
+  constructor () {}
 
-  getController() {
-    const controller = this.nextRouter.query.controller;
-    return controller;
+  getController () {
+    const controller = this.nextRouter.query.controller
+    return controller
   }
 
-  getAction() {
-    const action = this.nextRouter.query.action;
-    return action;
+  getAction () {
+    const action = this.nextRouter.query.action
+    return action
   }
 
-  getID() {
-    const id  = this.nextRouter.query.id;
-    return id;
+  getID () {
+    const id = this.nextRouter.query.id
+    return id
   }
 
-  #extRouter = useRouter();
-};
+  #extRouter = useRouter()
+}
 
-export default ModelController;
+export default ModelController
