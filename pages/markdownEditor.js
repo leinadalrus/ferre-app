@@ -8,17 +8,6 @@ function MarkdownEditor ({ documents }) {
   )
 }
 
-/* export async function getStaticProps () {
-  const response = await fetch('https://.../documents')
-  const request = await response.json()
-
-  return {
-    props: {
-      documents
-    }
-  }
-} */
-
 export async function getStaticPaths () {
   const response = await fetch('https://.../documents')
   const documents = await response.json()
@@ -32,11 +21,18 @@ export async function getStaticPaths () {
   return { paths, fallback: false }
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps ({ params }) {
   const response = await fetch(`https://.../documents/${params.id}`)
   const request = await response.json()
 
-  return { props: { document }}
+  return { props: { document } }
+}
+
+export async function getServerSideProps () {
+  const response = await fetch(`https://.../documents/data`)
+  const data = await response.json()
+
+  return { props: { data } }
 }
 
 export default MarkdownEditor
