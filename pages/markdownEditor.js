@@ -8,22 +8,22 @@ function MarkdownEditor ({ documents }) {
   )
 }
 
-export async function getStaticProps () {
-  const response = await fetch('https://.../documents')
-  const request = await response.json()
+// export async function getStaticProps () {
+//   const response = await fetch('https://.../documents')
+//   const request = await response.json()
 
-  return {
-    props: {
-      documents
-    }
-  }
-}
+//   return {
+//     props: {
+//       documents
+//     }
+//   }
+// }
 
 export async function getStaticPaths () {
   const response = await fetch('https://.../documents')
   const documents = await response.json()
 
-  const paths = posts.map(docs => {
+  const paths = documents.map(docs => {
     params: {
       id: docs.id
     }
