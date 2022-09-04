@@ -1,7 +1,13 @@
 import { useRouter } from 'next/router'
 
-class ModelController {
-  constructor () {}
+export function ModelRouter() {
+  return useRouter()
+}
+
+export default class ModelController {
+  constructor () {
+    this.nextRouter = ModelRouter()
+  }
 
   getController () {
     const controller = this.nextRouter.query.controller
@@ -18,7 +24,5 @@ class ModelController {
     return id
   }
 
-  #extRouter = useRouter()
+  #nextRouter = ModelRouter()
 }
-
-export default ModelController
