@@ -10,7 +10,7 @@ class MarkdownEditorModel {
       sources: [
         {
           src: './public/documents/' + this.markdownAffix.toString(),
-          type: 'video/webm' // "webm" is open and free, so its good for FOSS-ing
+          type: 'file/md' // "webm" is open and free, so its good for FOSS-ing
         }
       ] // have the sources be routed with AWS S3
     }
@@ -43,6 +43,14 @@ class MarkdownEditorModel {
     })
 
     return rw
+  }
+
+  retrieveContent (userInput) {
+    userInput = this.handleInput()
+    // userInput = document.getElementById('user-input-form').value
+    document.getElementById('markdown-editor-content').innerHTML = marked.parse(
+      userInput
+    )
   }
 
   render () {

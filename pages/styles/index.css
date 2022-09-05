@@ -1,0 +1,17 @@
+:root {
+  --root-font-size: 11px;
+  --bg: #D0D7E1;
+  --text-color: #2b2b2b;
+};
+
+html, body, nav, ul, h1, h2, h3, h4, h5, h6, a, canvas {
+  margin: 0;
+  padding: 0;
+  color: var(--text-color);
+}
+
+html, body {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: var(--root-font-size);
+  background: var(--bg);
+}
