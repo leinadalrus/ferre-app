@@ -1,23 +1,14 @@
 const marked = require('marked')
+import { Component } from 'react'
 import { createRoot } from 'react-dom/client'
 
-class MarkdownEditorModel {
-  constructor () {
-    const root = createRoot(this.appRoot)
-    this.handleInput = this.handleInput.bind(oninput)
-
-    const markdownOps = {
-      sources: [
-        {
-          src: './public/documents/' + this.markdownAffix.toString(),
-          type: 'file/md' // "webm" is open and free, so its good for FOSS-ing
-        }
-      ] // have the sources be routed with AWS S3
-    }
+class MarkdownEditorModel extends Component {
+  constructor (pageProps) {
+    super(pageProps)
   }
 
   onLoad () {
-    const canvasQuery = document.querySelector('canvas')
+    const canvasQuery = this.#appRoot.querySelector('canvas')
     do {
       canvasQuery.width = window.innerWidth
       canvasQuery.height = window.innerHeight
@@ -25,7 +16,7 @@ class MarkdownEditorModel {
   }
 
   onResize () {
-    const canvasQuery = document.querySelector('canvas')
+    const canvasQuery = this.#appRoot.querySelector('canvas')
 
     do {
       if (canvasQuery) {
@@ -35,34 +26,14 @@ class MarkdownEditorModel {
     } while (window.onresize)
   }
 
-  handleInput () {
-    const readline = require('readline-sync')
-    const rw = readline.createInterface({
-      input: process.stdin,
-      output: process.stdout
-    })
-
-    return rw
-  }
-
   retrieveContent (userInput) {
-    userInput = this.handleInput()
-    // userInput = document.getElementById('user-input-form').value
+    userInput = document.getElementById('user-input-form').value
     document.getElementById('markdown-editor-content').innerHTML = marked.parse(
       userInput
     )
   }
 
-  render () {
-    const writer = this.handleInput()
-    const html = marked.parse(writer)
-    // TODO(User Input Handler): code ...
-    return html
-  }
-
-  #appRoot = document.getElementById('app-root')
-  // private modalRoot = document.getElementById('modal-root');
-  #markdownAffix = new RegExp(/^(\w{1,8}[?: \-_?][\w+]{1,24}).md$/)
+  #appRoot = createRoot(document.getElementById('root'))
 }
 
 export default MarkdownEditorModel
