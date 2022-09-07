@@ -3,10 +3,18 @@
 #include <emscripten/emscripten.h>
 #endif
 
-int __on_entry() {
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+int onEntry() {
   return 0;
 }
 
 int main() {
   return 0;
 }
+
+#ifdef __cplusplus
+}
+#endif
