@@ -1,11 +1,5 @@
 function MarkdownEditor ({ documents }) {
-  return (
-    <body>
-      {documents.map(controller => (
-        <div>{controller.action.id}</div>
-      ))}
-    </body>
-  )
+  return documents.map(controller => controller.action.id)
 }
 
 export async function getStaticPaths () {
