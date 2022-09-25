@@ -2,6 +2,7 @@
 
 const fs = require('fs')
 const dataForge = require('data-forge')
+const formulaJS = require('@formulajs/formulajs')
 
 function readConclusions (fileName) {
   return new Promise((yes, no) => {
