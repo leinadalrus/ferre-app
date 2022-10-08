@@ -23,11 +23,18 @@ html(lang="en")
       ul(class="navbar-nav me-auto mb-2 mb-lg-0")
         li(class="nav-item")
           a(class="nav-link active" href="/~/pages/views/index.pug") Home
-        li(class="nav-item")
-          a(class="nav-link active" href="/~/pages/views/modelDashboard.pug") Dashboard 
-        li(class="nav-item")
-          a(class="nav-link active" href="/~/pages/views/markdownEditor.pug") Writer 
-        li(class="nav-item")
-          a(class="nav-link active" href="/~/pages/views/userProfile.pug") Profile 
-
-  body 
+        hr 
+        #memberUser
+          if !memberUser.isAnonymous
+            li(class="nav-item")
+              a(class="nav-link active" href="/~/pages/views/modelDashboard.pug") Dashboard 
+            li(class="nav-item")
+              a(class="nav-link active" href="/~/pages/views/markdownEditor.pug") Writer 
+            li(class="nav-item")
+              a(class="nav-link active" href="/~/pages/views/userProfile.pug") Profile 
+            hr 
+            li(class="nav-item")
+              a(class="nav-link active" href="/~/pages/views/log_out_sign_off.php") Logout 
+          else
+            li(class="nav-item")
+              a(class="nav-link active" href="/~/pages/views/userProfile.pug") Login 

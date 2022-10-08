@@ -1,3 +1,7 @@
+<<<<<<< Updated upstream
+=======
+const pug = require('pug')
+>>>>>>> Stashed changes
 const marked = require('marked')
 import ModelController from './ModelController'
 

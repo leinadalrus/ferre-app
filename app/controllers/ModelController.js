@@ -1,3 +1,4 @@
+const pug = require('pug')
 import { useRouter } from 'next/router'
 
 export function ModelRouter() {
@@ -22,6 +23,16 @@ export default class ModelController {
   getID () {
     const id = this.nextRouter.query.id
     return id
+  }
+
+  compileTemplate (template) {
+    const compiledFunction = pug.compileFile(template)
+    return compiledFunction
+  }
+
+  renderTemplate (template) {
+    const renderedFunction = pug.renderFile(template)
+    return renderedFunction
   }
 
   #nextRouter = ModelRouter()
