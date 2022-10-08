@@ -5,6 +5,53 @@ import { readFile } from 'fs'
 const PAD_INDEX = 0
 const OOV_INDEX = 2
 
+const Tensors = {}
+const ArraysIntoTensors = {}
+
+function convertArrays2Tensors () {
+  Tensors.rawTrainFeatures = tensorflowjs.tensor2d(/* sentimentCnnV1Data.trainFeatures */)
+  Tensors.rawTrainFeatures = tensorflowjs.tensor2d(/* sentimentCnnV1Data.trainTarget */)
+  Tensors.rawTrainFeatures = tensorflowjs.tensor2d(/* sentimentCnnV1Data.testFeatures */)
+  Tensors.rawTrainFeatures = tensorflowjs.tensor2d(/* sentimentCnnV1Data.testTarget */)
+}
+
+function listenContentUploadEvent () {
+  let tensors
+  document.addEventListener(
+    'DOMContentLoaded',
+    async () => {
+      await sentimentCnnV1Data.loadData()
+      convertArrays2Tensors()
+    },
+    false
+  )
+}
+
+function computeBaseline () {
+  const avgScore = tensorflowjs.mean(Tensors.trainTarget)
+  const baseline = tensorflowjs.mean(
+    tensorflowjs.pow(tensorflowjs.sub(Tensors.testTarget, avgScore), 2)
+  )
+}
+
+function determineMeanAndStandard (data) {
+  const dataMean = data.mean(0)
+  const differsFromMean = data.sub(dataMean)
+  const squaredFromMeanDiff = differsFromMean.square()
+  const variance = squaredFromMeanDiff.mean(0)
+  const standard = data
+    .sub(data.mean(0))
+    .square()
+    .mean()
+    .sqrt()
+
+  return { mean, standard }
+}
+
+function normalizeTensors (data, dataMean, dataStandard) {
+  return data.sub(dataMean).div(dataStandard)
+}
+
 function padSequences (
   sequences,
   maxLen,
@@ -127,3 +174,7 @@ SentimentProcessor.loadModel(LocalHosting.hostedURLs.model)
 SentimentProcessor.loadMetadata()
 SentimentProcessor.initProcess()
 SentimentProcessor.predictSentiment('./public/resources/documents/hemingway.md')
+
+/* NOTE(Daniel):
+ Softmax function? Where to do?
+*/
